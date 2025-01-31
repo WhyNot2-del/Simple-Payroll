@@ -1,5 +1,5 @@
 package Users;
 
-public class Users{
-    
+abstract class User{
+
 }
