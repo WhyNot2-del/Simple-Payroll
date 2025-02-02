@@ -64,3 +64,20 @@ class RegUser extends User {
     }
 
 }
+
+class AdminUser extends User {
+    private double payFund;
+
+    public double getPayFund() {
+        return payFund;
+    }
+
+    public void setPayFund(double payFund) {
+        this.payFund = payFund;
+    }
+
+    public AdminUser(String username, String password, String email, String ssn, double payFund) {
+        super(username, password, email, ssn);
+        this.payFund = payFund;
+    }
+}
