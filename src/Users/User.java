@@ -6,9 +6,13 @@ abstract class User{
     private String email;
     private String ssn;
 
-    boolean checkPassword(String incomingPassword){
-        //TODO: Stub of method, add logic for checking password.
-        return false;
+    private static String hashPassword(String passwd){
+        //TODO: Stub of method, add logic for hashing passwords.
+        return passwd;
+    }
+
+    public boolean checkPassword(String incomingPassword){
+        return this.password.equals(hashPassword(incomingPassword));
     }
 
     public String getUsername() {
@@ -28,4 +32,10 @@ abstract class User{
         this.ssn = newSSN;
     }
 
+    public User(String username, String password, String email, String ssn){
+        this.username = username;
+        this.email = email;
+        this.ssn = ssn;
+        this.password = hashPassword(password);
+    }
 }
