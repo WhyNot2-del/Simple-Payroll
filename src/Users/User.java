@@ -39,3 +39,28 @@ abstract class User{
         this.password = hashPassword(password);
     }
 }
+
+class RegUser extends User {
+    private double wallet;
+    private double payRate;
+
+    public double getWallet() {
+        return wallet;
+    }
+    public void setWallet(double wallet) {
+        this.wallet = wallet;
+    }
+    public double getPayRate() {
+        return payRate;
+    }
+    public void setPayRate(double payRate) {
+        this.payRate = payRate;
+    }
+
+    public RegUser(String username, String password, String email, String ssn, double payRate){
+        super(username, password, email, ssn);
+        this.wallet = 500;
+        this.payRate = payRate;
+    }
+
+}
