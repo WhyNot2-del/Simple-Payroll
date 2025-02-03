@@ -4,12 +4,9 @@ import java.util.ArrayList;
 
 class UserManager {
     
-    /* Grabs wallet variable from data class and output it to the user.
-    * Removes $500 from wallet variable using a set method.
-    * Outputs to the user their new wallet amount */
-    public void spendPayCheck() {
-
-    } //  ends getPaycheck
+    public void spendPaycheck(ArrayList<User> users, int Employee, int spentPay) {
+        users.get(Employee).setWallet(users.get(Employee).getWallet() - spentPay);
+    } //  ends spendPaycheck method
 } //  ends UserManager class
 
 class AdminManager {
@@ -49,8 +46,4 @@ class AdminManager {
     public void removeEmployee(ArrayList<User> users, int employee) {
         users.remove(employee);
     } //  ends removeEmployee method
-
-    public void spendPaycheck(ArrayList<User> users, int Employee, int spentPay) {
-        users.get(Employee).setWallet(users.get(Employee).getWallet() - spentPay);
-    } //  ends spendPaycheck method
 } //  ends AdminManager class
