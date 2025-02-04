@@ -23,7 +23,7 @@ import javax.crypto.spec.PBEKeySpec;
  * Most of the information for a user will be found is this class, but it doesn't contain useful information for their roles
  * A role should be defined in a subclass, with the User as it's superclass. User is an Abstract class to prevent initilization of a User without a role.
 */
-abstract class User {
+public abstract class User {
     private String username;
     private String password;
     private String email;
@@ -171,122 +171,5 @@ abstract class User {
         } catch(InvalidKeySpecException e){
             throw new BadPasswordException();
         }
-    }
-}
-
-/*
- * class RegUser [Regular User] (Derived from User)
- * This class represents an employee in our Payroll Program, with properties for their wallet, and how much they are paid.
- * In theory, this could also include more information such as their role in the company, or when they were hired.
- */
-class RegUser extends User {
-    private double wallet; // How much money our user has.
-    private double payRate; // How much the user is paid.
-
-    /*
-     * double Method,
-     * Getter for our wallet property.
-     */
-    public double getWallet() {
-        return wallet;
-    }
-
-    /*
-     * void method
-     * Setter for our wallet property.
-     * Arguments:
-     *  newWallet (double): The new value of our wallet.
-     */
-    public void setWallet(double newWallet) {
-        this.wallet = newWallet;
-    }
-
-    /*
-     * double Method
-     * Getter method for our payRate property.
-     */
-    public double getPayRate() {
-        return payRate;
-    }
-
-    /*
-     * void Method
-     * Setter method for our payRate.
-     * Arguments:
-     *  newPayRate (double): Our new payRate.
-     */
-    public void setPayRate(double newPayRate) {
-        this.payRate = newPayRate;
-    }
-
-    /* 
-     * Constructor Method
-     * This constructor mostly just calls our superclass's constructor to initialize it's values
-     * But we also initilize our RegUser exclusive properties, wallet and payRate.
-     * Wallet is always started with a value of $500, while payRate is a parameter.
-     * Arguments:
-     *  (Refer to User for unlisted Parameters)
-     *  payRate (double) Our initial payRate.
-     * Exceptions:
-     *  BadPasswordException: Thrown when we have an InvalidKeySpec
-     *  NoSuchAlgorithmException: Bubbled from hashPassword, thrown if Java cannot use/find "PBKDF2WithHmacSHA1", if throw, program should exit gracefully.
-     */
-    public RegUser(String username, String password, String email, String ssn, double payRate) throws BadPasswordException, NoSuchAlgorithmException {
-        super(username, password, email, ssn);
-        this.wallet = 500;
-        this.payRate = payRate;
-    }
-
-}
-
-/*
- * class AdminUser (Derived from User)
- * An Adminstrative User in our Payroll Program
- * An Administrative User is the user from which the Regular Users will be paid, using their property of the payFund.
- */
-class AdminUser extends User {
-    private double payFund; // The fund from which payment is given.
-
-
-    /*
-     * double Method
-     * Getter for our payFund property.
-     */
-    public double getPayFund() {
-        return payFund;
-    }
-
-    /*
-     * void Method
-     * Setter for our payFund property
-     * Arguments:
-     *  newPayFund (double): The value of our new payFund.
-     */
-    public void setPayFund(double newPayFund) {
-        this.payFund = newPayFund;
-    }
-
-    /*
-     * Constructor Method
-     * This constructor mostly just calls our superclass's constructor to initialize it's values.
-     * But we also initialize our AdminUser exclusive value, payFund.
-     * Arguments:
-     *  (Refer to superclass for unlisted parameters)
-     * payFund (double): Our initial value for our payfund.
-     */
-    public AdminUser(String username, String password, String email, String ssn, double payFund) throws BadPasswordException, NoSuchAlgorithmException {
-        super(username, password, email, ssn);
-        this.payFund = payFund;
-    }
-}
-
-/*
- * Class BadPasswordException (Derived from Exception)
- * An Exception class, which essentially is an alias for a InvalidKeySpecException, thrown while hashing our password.
- * I decided to create a custom Exception for this, to help make it more clear what type of error is actually happening, instead of a value exception name.
- */
-class BadPasswordException extends Exception {
-    public BadPasswordException(){
-        super("Invalid Password provided for hashing.");
     }
 }
