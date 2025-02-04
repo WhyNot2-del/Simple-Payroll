@@ -66,4 +66,8 @@ public class RegUser extends User {
         this.payRate = payRate;
     }
 
+    @Override
+    public String toString(){
+        return super.toString() + "\n Type: Regular Employee";
+    }
 }
