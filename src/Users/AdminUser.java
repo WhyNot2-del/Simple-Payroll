@@ -41,4 +41,9 @@ public class AdminUser extends User {
         super(username, password, email, ssn);
         this.payFund = payFund;
     }
+
+    @Override
+    public String toString(){
+        return super.toString() + "\n Type: Administrator User.";
+    }
 }
