@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
  * An Adminstrative User in our Payroll Program
  * An Administrative User is the user from which the Regular Users will be paid, using their property of the payFund.
  */
-class AdminUser extends User {
+public class AdminUser extends User {
     private double payFund; // The fund from which payment is given.
 
 
