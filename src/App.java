@@ -13,6 +13,9 @@ public class App {
         boolean isAdmin = false;
         User currentUser = null;
 
+        System.out.print("Create an account for demo.");
+        createAdminUser();
+
         System.out.print("Hello! I hope your day is going well, it's time to log in!");
         System.out.print("Are you an admin or a regular user?(Please enter 'admin', or 'reguser')");
         String adminoruser = input.nextLine();
@@ -56,16 +59,36 @@ public class App {
             String answer = input.nextLine();
 
             if(answer.toLowerCase().equals("y")) {
-                spendPaycheck(currentUser);
+                spendPaycheck();
             }
         }
     }
 
-    public static void spendPaycheck(User employee) {
-        UserManager.spendPaycheck(employee);
+    public static User getUser() {
+        Scanner input = new Scanner(System.in);
+        boolean running = true;
+
+        System.out.print("What employee would you like to get?: ");
+        String userResponse = input.nextLine();
+
+        for (User currentEmployee : employees) {
+
+            if(currentEmployee.getUsername().equals(userResponse)) {
+                return currentEmployee;
+            }   
+        }
+        return null;
     }
 
-    public static void createUser() {
+    public static void spendPaycheck() {
+        User employee = getUser();
+        if(employee.getClass() == RegUser.class){
+            UserManager.spendPaycheck((RegUser)employee);
+        }
+        System.out.println("User must be a regular user to be paid! Admins work for free.");
+    }
+
+    public static void createUser() throws BadPasswordException, NoSuchAlgorithmException {
 
         Scanner input = new Scanner(System.in);
 
@@ -85,10 +108,15 @@ public class App {
 
         String userPassword = input.nextLine();
 
-        AdminManager.addEmployee(employees, userEmail, userUsername, userSSN, userPassword);
+        System.out.print("Please enter your wallet amount: ");
+
+        Double walletAmount = input.nextDouble();
+
+        AdminManager.addEmployee(employees, userEmail, userUsername, userSSN, userPassword, walletAmount);
+
     }
 
-    public static void createAdminUser() {
+    public static void createAdminUser() throws BadPasswordException, NoSuchAlgorithmException {
 
         Scanner input = new Scanner(System.in);
 
@@ -104,7 +132,11 @@ public class App {
         System.out.print("Please enter a password");
         String userPassword = input.nextLine();
 
-        AdminManage.addAdmin(employees, userEmail, userUsername, userSSN, userPassword);
+        System.out.print("Please enter your pay fund amount: ");
+
+        Double payfundAmount = input.nextDouble();
+
+        AdminManager.addAdmin(employees, userEmail, userUsername, userSSN, userPassword, payfundAmount);
     }
 
     public static void viewEmployeeList() {
