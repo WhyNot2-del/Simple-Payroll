@@ -172,4 +172,8 @@ public abstract class User {
             throw new BadPasswordException();
         }
     }
+
+    public String toString(){
+        return String.format("Username: %s,  Email: %s", this.username, this.email);
+    }
 }
