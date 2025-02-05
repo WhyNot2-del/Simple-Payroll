@@ -14,11 +14,11 @@ public class App {
         boolean isAdmin = false;
         User currentUser = null;
 
-        System.out.print("Create an account for demo.");
+        System.out.println("Create an account for demo.");
         createAdminUser();
 
-        System.out.print("Hello! I hope your day is going well, it's time to log in!");
-        System.out.print("Are you an admin or a regular user?(Please enter 'admin', or 'reguser')");
+        System.out.println("Hello! I hope your day is going well, it's time to log in!");
+        System.out.println("Are you an admin or a regular user?(Please enter 'admin', or 'reguser')");
         String adminoruser = input.nextLine();
         
         try {
@@ -26,7 +26,7 @@ public class App {
                 
                 case "admin": currentUser = logInAdmin(); isAdmin = true; break;
                 case "reguser": currentUser = logInRegUser(); break;
-                default: System.out.print("You didn't enter 'admin' or 'regular'"); break;
+                default: System.out.println("You didn't enter 'admin' or 'regular'"); break;
             }
         } catch (NoSuchAlgorithmException e) {
         }
@@ -36,7 +36,7 @@ public class App {
             boolean running = true;
             
             do {
-                System.out.print("Please enter the letter that corresponds to the menu option you would like to choose");
+                System.out.println("Please enter the letter that corresponds to the menu option you would like to choose");
                 System.out.println("~~         Type CU to create a user        ~~");
                 System.out.println("~~     Type CAU to create an admin user    ~~");
                 System.out.println("~~    Type VEL to view an employee list    ~~");
@@ -57,7 +57,7 @@ public class App {
             } while(running);
         } 
         else{
-            System.out.print("Would you like to spend your paycheck? :-) (y/n)");
+            System.out.println("Would you like to spend your paycheck? :-) (y/n)");
             String answer = input.nextLine();
 
             if(answer.toLowerCase().equals("y")) {
@@ -94,19 +94,19 @@ public class App {
 
         Scanner input = new Scanner(System.in);
 
-        System.out.print("Please enter your email");
+        System.out.println("Please enter your email");
 
         String userEmail = input.nextLine();
 
-        System.out.print("Please enter a username");
+        System.out.println("Please enter a username");
 
         String userUsername = input.nextLine();
 
-        System.out.print("Please enter your ssn");
+        System.out.println("Please enter your ssn");
 
         String userSSN = input.nextLine();
 
-        System.out.print("Please enter a password");
+        System.out.println("Please enter a password");
 
         String userPassword = input.nextLine();
 
@@ -122,16 +122,16 @@ public class App {
 
         Scanner input = new Scanner(System.in);
 
-        System.out.print("Please enter your email");
+        System.out.println("Please enter your email");
         String userEmail = input.nextLine();
 
-        System.out.print("Please enter a username");
+        System.out.println("Please enter a username");
         String userUsername = input.nextLine();
 
-        System.out.print("Please enter your ssn");
+        System.out.println("Please enter your ssn");
         String userSSN = input.nextLine();
 
-        System.out.print("Please enter a password");
+        System.out.println("Please enter a password");
         String userPassword = input.nextLine();
 
         System.out.print("Please enter your pay fund amount: ");
@@ -154,20 +154,20 @@ public class App {
        
         Scanner input = new Scanner(System.in);
         boolean running = true;
-        System.out.print("Do you want to see a specific employee? Type: Y/N");
+        System.out.println("Do you want to see a specific employee? Type: Y/N");
         String userResponse = input.nextLine();
 
         if(userResponse.toLowerCase().equals("n")) {
             running = false;
         }
 
-        System.out.print("What employee would you like to see?");
+        System.out.println("What employee would you like to see?");
         userResponse = input.nextLine();
 
         for (User currentEmployee : employees) {
 
             if(currentEmployee.getUsername().equals(userResponse)) {
-                System.out.print(currentEmployee);
+                System.out.println(currentEmployee);
                 return;
             }   
         }
@@ -182,7 +182,7 @@ public class App {
 
         if(hours < 0) {
 
-            System.out.print("You have inputted a negative numeric value for the amount of hours employee works");
+            System.out.println("You have inputted a negative numeric value for the amount of hours employee works");
         }
         else {
             UserManager.modifyEmployeeWallet(employee, hours);
@@ -231,7 +231,7 @@ public class App {
                 }
             }
         } 
-        System.out.print("Unable to find user!");
+        System.out.println("Unable to find user!");
         return null;
         
     }
