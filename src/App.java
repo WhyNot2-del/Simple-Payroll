@@ -12,7 +12,6 @@ public class App {
 
         Scanner input = new Scanner(System.in);
         boolean isAdmin = false;
-        User currentUser = null;
 
         System.out.println("Create an account for demo.");
         createAdminUser();
@@ -24,11 +23,13 @@ public class App {
         try {
             switch(adminoruser.toLowerCase()) {
                 
-                case "admin": currentUser = logInAdmin(); isAdmin = true; break;
-                case "reguser": currentUser = logInRegUser(); break;
+                case "admin": logInAdmin(); isAdmin = true; break;
+                case "reguser": logInRegUser(); break;
                 default: System.out.println("You didn't enter 'admin' or 'regular'"); break;
             }
         } catch (NoSuchAlgorithmException e) {
+            System.err.println("Yoru computer is unable to use our password hasing Algorithm. As such, we'll exit the program.");
+            System.exit(1); // Exit Error Code 1, following UNIX standard of non-zero exit codes.
         }
 
         if(isAdmin) {
@@ -84,6 +85,10 @@ public class App {
 
     public static void spendPaycheck() {
         User employee = getUser();
+        if(employee == null){
+            System.out.println("Sorry, you've given an invalid username.");
+            return;
+        }
         if(employee.getClass() == RegUser.class){
             UserManager.spendPaycheck((RegUser)employee);
         }
@@ -92,27 +97,35 @@ public class App {
 
     public static void createUser() throws BadPasswordException, NoSuchAlgorithmException {
 
+        String  userEmail, userUsername, userSSN, userPassword;
+        Double walletAmount = null;
         Scanner input = new Scanner(System.in);
 
-        System.out.println("Please enter your email");
+        do{
+            System.out.println("Please enter your email");
+            userEmail = input.nextLine();
+        } while(userEmail.isBlank());
 
-        String userEmail = input.nextLine();
 
-        System.out.println("Please enter a username");
+        do{
+            System.out.println("Please enter a username");
+            userUsername = input.nextLine();
+        } while(userUsername.isBlank());
 
-        String userUsername = input.nextLine();
+        do{
+            System.out.println("Please enter your ssn");
+            userSSN = input.nextLine();
+        }while(userSSN.isBlank());
 
-        System.out.println("Please enter your ssn");
+        do{
+            System.out.println("Please enter a password");
+            userPassword = input.nextLine();
+        }while(userPassword.isBlank());
 
-        String userSSN = input.nextLine();
-
-        System.out.println("Please enter a password");
-
-        String userPassword = input.nextLine();
-
-        System.out.print("Please enter your wallet amount: ");
-
-        Double walletAmount = input.nextDouble();
+        do{
+            System.out.print("Please enter your wallet amount: ");
+            walletAmount = input.nextDouble();
+        }while(walletAmount.isNaN());
 
         AdminManager.addEmployee(employees, userEmail, userUsername, userSSN, userPassword, walletAmount);
 
@@ -120,23 +133,35 @@ public class App {
 
     public static void createAdminUser() throws BadPasswordException, NoSuchAlgorithmException {
 
+        String  userEmail, userUsername, userSSN, userPassword;
+        Double payfundAmount = null;
         Scanner input = new Scanner(System.in);
 
-        System.out.println("Please enter your email");
-        String userEmail = input.nextLine();
+        do{
+            System.out.println("Please enter your email");
+            userEmail = input.nextLine();
+        } while(userEmail.isBlank());
 
-        System.out.println("Please enter a username");
-        String userUsername = input.nextLine();
 
-        System.out.println("Please enter your ssn");
-        String userSSN = input.nextLine();
+        do{
+            System.out.println("Please enter a username");
+            userUsername = input.nextLine();
+        } while(userUsername.isBlank());
 
-        System.out.println("Please enter a password");
-        String userPassword = input.nextLine();
+        do{
+            System.out.println("Please enter your ssn");
+            userSSN = input.nextLine();
+        }while(userSSN.isBlank());
 
-        System.out.print("Please enter your pay fund amount: ");
+        do{
+            System.out.println("Please enter a password");
+            userPassword = input.nextLine();
+        }while(userPassword.isBlank());
 
-        Double payfundAmount = input.nextDouble();
+        do{
+            System.out.print("Please enter your wallet amount: ");
+            payfundAmount = input.nextDouble();
+        }while(payfundAmount.isNaN());
 
         AdminManager.addAdmin(employees, userEmail, userUsername, userSSN, userPassword, payfundAmount);
     }
@@ -153,13 +178,7 @@ public class App {
     public static void viewEmployee() {
        
         Scanner input = new Scanner(System.in);
-        boolean running = true;
-        System.out.println("Do you want to see a specific employee? Type: Y/N");
         String userResponse = input.nextLine();
-
-        if(userResponse.toLowerCase().equals("n")) {
-            running = false;
-        }
 
         System.out.println("What employee would you like to see?");
         userResponse = input.nextLine();
@@ -171,6 +190,7 @@ public class App {
                 return;
             }   
         }
+        System.out.println("Sorry, you've given an invalid username.");
     }
 
     public static void payUser() {   
@@ -210,17 +230,20 @@ public class App {
                 if(currentEmployee.checkPassword(password)) {
                     if(currentEmployee.getClass() == RegUser.class) {
                         return (RegUser)currentEmployee;
+                    } else {
+                        System.out.println("You've selected login as a regular user, but you've entered an admin username.");
+                        return null;
                     }
                 }
             }
         }
+        System.out.println("Unable to find user!");
         return null;
     }
 
     public static AdminUser logInAdmin() throws NoSuchAlgorithmException {
 
         Scanner input = new Scanner(System.in);
-        boolean passwordTrue = false;
 
         System.out.print("Hello, please enter your username!: ");
         String username = input.nextLine();
@@ -233,6 +256,9 @@ public class App {
                 if(currentEmployee.checkPassword(password)) {
                     if(currentEmployee.getClass() == AdminUser.class) {
                         return (AdminUser)currentEmployee;
+                    } else {
+                        System.out.println("You've selecetd login as a Admin user, but you've entered an Regular User username.");
+                        return null;
                     }
                 }
             }
