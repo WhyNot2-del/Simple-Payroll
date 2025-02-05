@@ -50,7 +50,7 @@ public class App {
                     case "cau": createAdminUser(); break;
                     case "vel": viewEmployeeList(); break;
                     case "ve": viewEmployee(); break;
-                    case "pu": running = payUser(); break;
+                    case "pu": payUser(); break;
                     case "q": running = false;
                     default: System.out.println("You did not correctly enter one of the options. Please try again.");
                 }
@@ -177,6 +177,12 @@ public class App {
         
         Scanner input = new Scanner(System.in);
 
+        User employee = getUser();
+        if(employee.getClass() != RegUser.class){
+            System.out.println("Can only pay a regular user.");
+            return;
+        }
+
         System.out.print("Hello, please enter employee hours: ");
         Double hours = input.nextDouble();
 
@@ -185,7 +191,7 @@ public class App {
             System.out.println("You have inputted a negative numeric value for the amount of hours employee works");
         }
         else {
-            UserManager.modifyEmployeeWallet(employee, hours);
+            AdminManager.modifyEmployeeWallet((RegUser)employee, hours);
         }
     }
 
