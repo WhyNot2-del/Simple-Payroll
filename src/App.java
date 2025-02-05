@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import Users.*;
 import java.security.NoSuchAlgorithmException;
+import UserManager.*;
 
 public class App {
 
