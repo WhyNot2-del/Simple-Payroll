@@ -173,7 +173,7 @@ public class App {
         }
     }
 
-    public void payUser(RegUser employee) {   
+    public static void payUser() {   
         
         Scanner input = new Scanner(System.in);
 
