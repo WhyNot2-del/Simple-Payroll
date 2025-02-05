@@ -45,11 +45,12 @@ public class App {
 
                 switch(answer.toLowerCase()){
 
-                    case "cu": createUser(); running = false; break;
-                    case "cau": createAdminUser(); running = false; break;
-                    case "vel": viewEmployeeList();  running = false; break;
-                    case "ve": viewEmployee(); running = false; break;
-                    case "pu": running = false; break;
+                    case "cu": createUser(); break;
+                    case "cau": createAdminUser(); break;
+                    case "vel": viewEmployeeList(); break;
+                    case "ve": viewEmployee(); break;
+                    case "pu": running = payUser(); break;
+                    case "q": running = false;
                     default: System.out.println("You did not correctly enter one of the options. Please try again.");
                 }
             } while(running);
