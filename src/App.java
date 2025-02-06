@@ -2,6 +2,7 @@
 // Assignment: CS145-Week 4: Inheritance and Polymorphism
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import Users.*;
 import java.security.NoSuchAlgorithmException;
@@ -104,6 +105,10 @@ public class App {
         boolean running = true;
         do {
             User currUser = handleLogin();
+            if(currUser == null){
+                System.out.println("Invalid User info");
+                continue;
+            }
             if(currUser.getClass() == AdminUser.class){
                 QuitType adminQuitType = adminMenu();
                 if(adminQuitType == QuitType.QUIT){
@@ -180,7 +185,11 @@ public class App {
         } while (userPassword.isBlank());
 
         do {
-            System.out.print("Please enter your pay rate: ");
+            try {
+                System.out.print("Please enter your pay rate: ");
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a numeric value. (I.E. 2, or 2.25)");
+            }
             payRate = input.nextDouble();
         } while (payRate.isNaN());
 
@@ -216,8 +225,12 @@ public class App {
         } while (userPassword.isBlank());
 
         do {
-            System.out.print("Please enter your payfund amount: ");
-            payfundAmount = input.nextDouble();
+            System.out.print("Please enter your pay fund amount: ");
+            try {
+                payfundAmount = input.nextDouble();
+            } catch (InputMismatchException e){
+                System.out.println("Please enter a numeric value. (I.E. 2, or 2.25)");
+            }
         } while (payfundAmount.isNaN());
 
         AdminManager.addAdmin(employees, userEmail, userUsername, userSSN, userPassword, payfundAmount);
@@ -331,7 +344,6 @@ public class App {
             }
         }
         System.out.println("Unable to find user!");
-        input.close();
         return null;
 
     }
