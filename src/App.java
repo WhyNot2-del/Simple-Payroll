@@ -11,6 +11,7 @@ enum QuitType {
 
 public class App {
 
+    //Creating an arraylist to use throughout the program, holding user nessesary information
     private final static ArrayList<User> employees = new ArrayList<User>();
 
     public static User handleLogin() {
@@ -103,6 +104,7 @@ public class App {
         } while (running);
     }
 
+    //Method to grab a user out of the list of users
     public static User getUser() {
         Scanner input = new Scanner(System.in);
 
@@ -118,6 +120,7 @@ public class App {
         return null;
     }
 
+    //Method to spend a regular users paycheck
     public static void spendPaycheck(RegUser employee) {
         if (employee == null) {
             System.out.println("Sorry, you've given an invalid username.");
@@ -130,6 +133,8 @@ public class App {
         System.out.println("User must be a regular user to be paid! Admins work for free.");
     }
 
+    //Method createUser that throws two exceptions to catch hashing and salting of passwords and if the password has incorrect characters in it
+    //The main purpose of this method is to ask the user for necessary information, and then send that information to the manager class.
     public static void createUser() throws BadPasswordException, NoSuchAlgorithmException {
 
         String userEmail, userUsername, userSSN, userPassword;
@@ -165,6 +170,7 @@ public class App {
 
     }
 
+    //Method to create a user of type admin; same as previous method but for an admin user
     public static void createAdminUser() throws BadPasswordException, NoSuchAlgorithmException {
 
         String userEmail, userUsername, userSSN, userPassword;
@@ -199,6 +205,7 @@ public class App {
         AdminManager.addAdmin(employees, userEmail, userUsername, userSSN, userPassword, payfundAmount);
     }
 
+    //Method to view the current list of employees held in the array list
     public static void viewEmployeeList() {
 
         for (int i = 0; i < employees.size(); i++) {
@@ -208,6 +215,7 @@ public class App {
         }
     }
 
+    //Method to view a specific employee within the Employees arraylist
     public static void viewEmployee() {
 
         Scanner input = new Scanner(System.in);
@@ -226,8 +234,10 @@ public class App {
         System.out.println("Sorry, you've given an invalid username.");
     }
 
-    public static void payUser() {
-
+    //Method to pay a regular user that requires the user to be an admin (because it's only an option in the admin menu) and for the user to input the hours of the employee.
+    //It checks for if the person inputs a negative number of hours
+    public static void payUser() {   
+        
         Scanner input = new Scanner(System.in);
 
         User employee = getUser();
@@ -240,7 +250,7 @@ public class App {
             return;
         }
 
-        System.out.print("Hello, please enter employee hours: ");
+        System.out.print("Hello, please enter the employees hours: ");
         Double hours = input.nextDouble();
 
         if (hours < 0) {
@@ -251,6 +261,7 @@ public class App {
         }
     }
 
+    //This method prompts a user for their username and passwords and then checks the arraylist 'employees' against the imputed information
     public static RegUser logInRegUser() throws NoSuchAlgorithmException {
 
         Scanner input = new Scanner(System.in);
@@ -278,6 +289,7 @@ public class App {
         return null;
     }
 
+    //Method that is similar to the one above accept this method is to log in an admin
     public static AdminUser logInAdmin() throws NoSuchAlgorithmException {
 
         Scanner input = new Scanner(System.in);
@@ -302,7 +314,9 @@ public class App {
             }
         }
         System.out.println("Unable to find user!");
+        input.close();
         return null;
 
     }
+    
 }
