@@ -161,7 +161,7 @@ public class App {
     public static void createUser() throws BadPasswordException, NoSuchAlgorithmException {
 
         String userEmail, userUsername, userSSN, userPassword;
-        Double payRate = null;
+        Double payRate = Double.NaN;
         Scanner input = new Scanner(System.in);
 
         do {
@@ -185,12 +185,13 @@ public class App {
         } while (userPassword.isBlank());
 
         do {
+            Scanner doubleScanner = new Scanner(System.in);
             try {
                 System.out.print("Please enter your pay rate: ");
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a numeric value. (I.E. 2, or 2.25)");
             }
-            payRate = input.nextDouble();
+            payRate = doubleScanner.nextDouble();
         } while (payRate.isNaN());
 
         AdminManager.addEmployee(employees, userEmail, userUsername, userSSN, userPassword, payRate);
@@ -201,33 +202,34 @@ public class App {
     public static void createAdminUser() throws BadPasswordException, NoSuchAlgorithmException {
 
         String userEmail, userUsername, userSSN, userPassword;
-        Double payfundAmount = null;
+        Double payfundAmount = Double.NaN;
         Scanner input = new Scanner(System.in);
-
+        
         do {
             System.out.println("Please enter your email");
             userEmail = input.nextLine();
         } while (userEmail.isBlank());
-
+        
         do {
             System.out.println("Please enter a username");
             userUsername = input.nextLine();
         } while (userUsername.isBlank());
-
+        
         do {
             System.out.println("Please enter your ssn");
             userSSN = input.nextLine();
         } while (userSSN.isBlank());
-
+        
         do {
             System.out.println("Please enter a password");
             userPassword = input.nextLine();
         } while (userPassword.isBlank());
-
+        
         do {
+            Scanner doubleScanner = new Scanner(System.in);
             System.out.print("Please enter your pay fund amount: ");
             try {
-                payfundAmount = input.nextDouble();
+                payfundAmount = doubleScanner.nextDouble();
             } catch (InputMismatchException e){
                 System.out.println("Please enter a numeric value. (I.E. 2, or 2.25)");
             }
@@ -280,8 +282,16 @@ public class App {
             return;
         }
 
-        System.out.print("Hello, please enter the employees hours: ");
-        Double hours = input.nextDouble();
+        Double hours = Double.NaN;
+        do {
+            Scanner doubleScanner = new Scanner(System.in);
+            try {
+                System.out.print("Hello, please enter the employees hours: ");
+                hours = doubleScanner.nextDouble();
+            } catch(InputMismatchException e){
+                System.out.println("Please enter a numeric value. (I.E. 2, or 2.25)");
+            }
+        } while(hours.isNaN());
 
         if (hours < 0) {
 
