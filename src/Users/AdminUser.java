@@ -4,7 +4,7 @@ import java.security.NoSuchAlgorithmException;
 
 /*
  * class AdminUser (Derived from User)
- * An Adminstrative User in our Payroll Program
+ * An Administrative User in our Payroll Program
  * An Administrative User is the user from which the Regular Users will be paid, using their property of the payFund.
  */
 public class AdminUser extends User {
