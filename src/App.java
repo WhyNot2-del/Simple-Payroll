@@ -225,7 +225,7 @@ public class App {
 
         for (int i = 0; i < employees.size(); i++) {
 
-            System.out.printf("%s%d%s%s", "(", i, ") ", employees.get(i).getUsername());
+            System.out.printf("%s%d%s%s\n", "(", i, ") ", employees.get(i).getUsername());
 
         }
     }
@@ -234,10 +234,9 @@ public class App {
     public static void viewEmployee() {
 
         Scanner input = new Scanner(System.in);
-        String userResponse = input.nextLine();
 
         System.out.println("What employee would you like to see?");
-        userResponse = input.nextLine();
+        String userResponse = input.nextLine();
 
         for (User currentEmployee : employees) {
 
