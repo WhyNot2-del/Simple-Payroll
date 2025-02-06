@@ -1,7 +1,7 @@
 /*
  * Authors: Christopher Waschke, Jackson Jenks, Brody Weinkauf
  * Description: Our dataclasses containing information about users, with an Abstract class containing baseline user logic, and subclasses for actual user types.
- * Assignment: CS145-Week 4: Inhertance and Polymorphism
+ * Assignment: CS145-Week 4: Inheritance and Polymorphism
  * Citation: https://docs.oracle.com/javase/8/docs/api/javax/crypto/spec/PBEKeySpec.html
  * Citation: https://stackoverflow.com/a/2861125 (How can I hash a password in Java?)
  */
@@ -21,7 +21,7 @@ import javax.crypto.spec.PBEKeySpec;
  * Abstract Class User
  * The basis class of a User, including their username, password, email and SSN.
  * Most of the information for a user will be found is this class, but it doesn't contain useful information for their roles
- * A role should be defined in a subclass, with the User as it's superclass. User is an Abstract class to prevent initilization of a User without a role.
+ * A role should be defined in a subclass, with the User as it's superclass. User is an Abstract class to prevent initialization of a User without a role.
 */
 public abstract class User {
     private String username;
@@ -30,11 +30,11 @@ public abstract class User {
     private String ssn; // Currently unused, but in production could be a useful piece of information.
 
     /* Protected Static String method (utility method)
-     * This method is very similiar to the citited "How can I hash a password in Java?" answer's first suggestion.
+     * This method is very similar to the citied "How can I hash a password in Java?" answer's first suggestion.
      * Essentially, we create a salt using securely generated random numbers
      * Then we create a Password spec using the desired password, and generated salt. (The spec also says it'll be hashed 255 times, and a length of 255)
      * We then create a SecretKeyFactory object to do the actual hashing, and then use it to return a byte array of the Base64 encoded key.
-     * Finally, we use the Base64 Encoder to return a String value of the salt and the password, seperated by a ":", for splitting later.
+     * Finally, we use the Base64 Encoder to return a String value of the salt and the password, separated by a ":", for splitting later.
      * Arguments:
      *  incomingPass (String): The password that will be hashed.
      * Exceptions:
@@ -53,7 +53,7 @@ public abstract class User {
     }
 
     /* Overloaded Protected Static String Method (utility method) 
-     * This overloaded Method functions very similiarly to the other hashPassword method
+     * This overloaded Method functions very similarly to the other hashPassword method
      * Except this takes the salt as a parameter, and decodes the Base64 back into it's original byte array.
      * Used for comparing an incomingPassword against the existing. For further documentation, refer to the other method.
      * Arguments:

@@ -51,7 +51,7 @@ public class RegUser extends User {
     /* 
      * Constructor Method
      * This constructor mostly just calls our superclass's constructor to initialize it's values
-     * But we also initilize our RegUser exclusive properties, wallet and payRate.
+     * But we also initialize our RegUser exclusive properties, wallet and payRate.
      * Wallet is always started with a value of $500, while payRate is a parameter.
      * Arguments:
      *  (Refer to User for unlisted Parameters)
@@ -68,6 +68,6 @@ public class RegUser extends User {
 
     @Override
     public String toString(){
-        return super.toString() + "\n Type: Regular Employee";
+        return super.toString() + String.format("\nType: Regular Employee, Wallet Value: %.2f", this.wallet);
     }
 }
