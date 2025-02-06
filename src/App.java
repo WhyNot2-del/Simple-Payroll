@@ -4,6 +4,10 @@ import Users.*;
 import java.security.NoSuchAlgorithmException;
 import UserManager.*;
 
+/*
+ * Enum QuitType
+ * Represents the two types of feedback given when a User exits a menu.
+ */
 enum QuitType {
     LOGOUT,
     QUIT
@@ -14,6 +18,11 @@ public class App {
     //Creating an arraylist to use throughout the program, holding user nessesary information
     private final static ArrayList<User> employees = new ArrayList<User>();
 
+    /*
+     * Static User Method
+     * Handles the loging in a user, based upon the users found in the employees Array List
+     * Returns the User Object representing the currently logged in user.
+     */
     public static User handleLogin() {
         Scanner input = new Scanner(System.in);
         do {
@@ -38,6 +47,11 @@ public class App {
         } while(true);
     }
 
+    /*
+     * QuitType adminMenu
+     * The menu and main loop of when a user logs in as an admin user.
+     * Returns which option the user choose to leave the loop, allowing for the main loop to determine where it's going.
+     */
     public static QuitType adminMenu() {
         Scanner input = new Scanner(System.in);
         while(true){
@@ -77,6 +91,7 @@ public class App {
         }
     }
 
+    // Our Main Method, Entry point.
     public static void main(String[] args) throws Exception {
         Scanner input = new Scanner(System.in);
 
