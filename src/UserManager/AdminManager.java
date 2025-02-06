@@ -1,6 +1,8 @@
 package UserManager;
 
 import Users.*;
+
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 public class AdminManager {
@@ -26,7 +28,7 @@ public class AdminManager {
     } //  ends modifyEmployeePayrate method
 
     // creates a new regUser object and places it into the users arraylist
-    public static void addEmployee(ArrayList<User> users, String email, String name, String ssn, String pass, double payRate) throws Exception {
+    public static void addEmployee(ArrayList<User> users, String email, String name, String ssn, String pass, double payRate) throws BadPasswordException, NoSuchAlgorithmException {
         users.add(new RegUser(name, pass, email, ssn, payRate));
     } //  ends addEmployee method
 
@@ -36,7 +38,7 @@ public class AdminManager {
     } //  ends removeEmployee method
 
     // creates a new adminUser object and places it into the users arraylist
-    public static void addAdmin(ArrayList<User> users, String email, String name, String ssn, String pass, double payFund) throws Exception {
+    public static void addAdmin(ArrayList<User> users, String email, String name, String ssn, String pass, double payFund) throws BadPasswordException, NoSuchAlgorithmException {
         users.add(new AdminUser(name, pass, email, ssn, payFund));
     } //  ends addEmployee method
 } //  ends AdminManager class
