@@ -60,7 +60,7 @@ public class App {
                     case "vel": viewEmployeeList(); break;
                     case "ve": viewEmployee(); break;
                     case "pu": payUser(); break;
-                    case "q": running = false;
+                    case "q": running = false; break;
                     default: System.out.println("You did not correctly enter one of the options. Please try again.");
                 }
             } while(running);
