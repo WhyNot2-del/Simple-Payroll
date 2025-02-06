@@ -44,6 +44,6 @@ public class AdminUser extends User {
 
     @Override
     public String toString(){
-        return super.toString() + String.format("Type: Administrator User, Pay Fund: %.2f", this.payFund);
+        return super.toString() + String.format("\nType: Administrator User, Pay Fund: %.2f", this.payFund);
     }
 }

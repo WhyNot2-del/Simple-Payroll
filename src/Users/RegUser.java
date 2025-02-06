@@ -68,6 +68,6 @@ public class RegUser extends User {
 
     @Override
     public String toString(){
-        return super.toString() + String.format("Type: Regular Employee, Wallet Value: %.2f", this.wallet);
+        return super.toString() + String.format("\nType: Regular Employee, Wallet Value: %.2f", this.wallet);
     }
 }
