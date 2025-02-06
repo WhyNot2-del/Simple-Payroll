@@ -12,26 +12,33 @@ public class App {
 
         Scanner input = new Scanner(System.in);
         boolean isAdmin = false;
+        boolean isUserValid = false;
 
         System.out.println("Create an account for demo.");
         createAdminUser();
 
-        System.out.println("Hello! I hope your day is going well, it's time to log in!");
-        System.out.println("Are you an admin or a regular user?(Please enter 'admin', or 'reguser')");
-        String adminoruser = input.nextLine();
         
-        try {
-            switch(adminoruser.toLowerCase()) {
-                
-                case "admin": logInAdmin(); isAdmin = true; break;
-                case "reguser": logInRegUser(); break;
-                default: System.out.println("You didn't enter 'admin' or 'regular'"); break;
+        do {
+            User checkUser = null;
+            System.out.println("Hello! I hope your day is going well, it's time to log in!");
+            System.out.println("Are you an admin or a regular user?(Please enter 'admin', or 'reguser')");
+            String adminoruser = input.nextLine();
+            try {
+                switch(adminoruser.toLowerCase()) {
+                    case "admin": checkUser = logInAdmin(); isAdmin = true; break;
+                    case "reguser": checkUser = logInRegUser();  break;
+                    default: System.out.println("You didn't enter 'admin' or 'regular'"); break;
+                }
+            } catch (NoSuchAlgorithmException e) {
+                System.err.println("Yoru computer is unable to use our password hasing Algorithm. As such, we'll exit the program.");
+                System.exit(1); // Exit Error Code 1, following UNIX standard of non-zero exit codes.
             }
-        } catch (NoSuchAlgorithmException e) {
-            System.err.println("Yoru computer is unable to use our password hasing Algorithm. As such, we'll exit the program.");
-            System.exit(1); // Exit Error Code 1, following UNIX standard of non-zero exit codes.
-        }
-
+            if(checkUser == null){
+                System.out.println("Unable to login. Please try again.");
+            } else {
+                isUserValid = true; 
+            }
+        } while(!isUserValid);
         if(isAdmin) {
             
             boolean running = true;
@@ -43,6 +50,7 @@ public class App {
                 System.out.println("~~    Type VEL to view an employee list    ~~");
                 System.out.println("~~   Type VE to view a specific employee   ~~");
                 System.out.println("~~       Type PU to pay an employee        ~~");
+                System.out.println("~~       Type q to exit the program        ~~");
                 String answer = input.nextLine();
 
                 switch(answer.toLowerCase()){
@@ -159,7 +167,7 @@ public class App {
         }while(userPassword.isBlank());
 
         do{
-            System.out.print("Please enter your wallet amount: ");
+            System.out.print("Please enter your payfund amount: ");
             payfundAmount = input.nextDouble();
         }while(payfundAmount.isNaN());
 
@@ -198,6 +206,10 @@ public class App {
         Scanner input = new Scanner(System.in);
 
         User employee = getUser();
+        if(employee == null){
+            System.out.println("Unable to find User.");
+            return;
+        }
         if(employee.getClass() != RegUser.class){
             System.out.println("Can only pay a regular user.");
             return;
