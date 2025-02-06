@@ -121,11 +121,11 @@ public class App {
 
         String userPassword = input.nextLine();
 
-        System.out.print("Please enter your wallet amount: ");
+        System.out.print("Please enter your hourly rate: ");
 
-        Double walletAmount = input.nextDouble();
+        Double hourlyRate = input.nextDouble();
 
-        AdminManager.addEmployee(employees, userEmail, userUsername, userSSN, userPassword, walletAmount);
+        AdminManager.addEmployee(employees, userEmail, userUsername, userSSN, userPassword, hourlyRate);
 
     }
 
