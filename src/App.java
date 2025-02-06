@@ -1,3 +1,6 @@
+// Authors: Christopher Waschke, Jackson Jenks, Brody Weinkauf
+// Assignment: CS145-Week 4: Inheritance and Polymorphism
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import Users.*;
@@ -15,7 +18,7 @@ enum QuitType {
 
 public class App {
 
-    //Creating an arraylist to use throughout the program, holding user nessesary information
+    //Creating an arraylist to use throughout the program, holding user necessary information
     private final static ArrayList<User> employees = new ArrayList<User>();
 
     /*
@@ -38,7 +41,7 @@ public class App {
                 }
             } catch (NoSuchAlgorithmException e) {
                 System.err.println(
-                        "Yoru computer is unable to use our password hasing Algorithm. As such, we'll exit the program.");
+                        "Your computer is unable to use our password hasing Algorithm. As such, we'll exit the program.");
                 System.exit(1); // Exit Error Code 1, following UNIX standard of non-zero exit codes.
             }
             if (checkUser == null) {
@@ -321,7 +324,7 @@ public class App {
                         return (AdminUser) currentEmployee;
                     } else {
                         System.out.println(
-                                "You've selecetd login as a Admin user, but you've entered an Regular User username.");
+                                "You've selected login as a Admin user, but you've entered an Regular User username.");
                         return null;
                     }
                 }
