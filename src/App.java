@@ -133,7 +133,7 @@ public class App {
     public static void createUser() throws BadPasswordException, NoSuchAlgorithmException {
 
         String userEmail, userUsername, userSSN, userPassword;
-        Double walletAmount = null;
+        Double payRate = null;
         Scanner input = new Scanner(System.in);
 
         do {
@@ -157,11 +157,11 @@ public class App {
         } while (userPassword.isBlank());
 
         do {
-            System.out.print("Please enter your wallet amount: ");
-            walletAmount = input.nextDouble();
-        } while (walletAmount.isNaN());
+            System.out.print("Please enter your pay rate: ");
+            payRate = input.nextDouble();
+        } while (payRate.isNaN());
 
-        AdminManager.addEmployee(employees, userEmail, userUsername, userSSN, userPassword, walletAmount);
+        AdminManager.addEmployee(employees, userEmail, userUsername, userSSN, userPassword, payRate);
 
     }
 
