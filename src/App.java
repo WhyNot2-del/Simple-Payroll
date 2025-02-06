@@ -22,15 +22,9 @@ public class App {
             String adminoruser = input.nextLine();
             try {
                 switch (adminoruser.toLowerCase()) {
-                    case "admin":
-                        checkUser = logInAdmin();
-                        return checkUser;
-                    case "reguser":
-                        checkUser = logInRegUser();
-                        return checkUser;
-                    default:
-                        System.out.println("You didn't enter 'admin' or 'regular'");
-                        break;
+                    case "admin": checkUser = logInAdmin(); return checkUser;
+                    case "reguser": checkUser = logInRegUser(); return checkUser;
+                    default: System.out.println("You didn't enter 'admin' or 'regular'"); break;
                 }
             } catch (NoSuchAlgorithmException e) {
                 System.err.println(
@@ -72,21 +66,12 @@ public class App {
                         System.out.println("Unable to create user.");
                     }
                     break;
-                case "vel":
-                    viewEmployeeList();
-                    break;
-                case "ve":
-                    viewEmployee();
-                    break;
-                case "pu":
-                    payUser();
-                    break;
-                case "lo":
-                    return QuitType.LOGOUT;
-                case "q":
-                    return QuitType.QUIT;
-                default:
-                    System.out.println("You did not correctly enter one of the options. Please try again.");
+                case "vel": viewEmployeeList(); break;
+                case "ve": viewEmployee(); break;
+                case "pu": payUser(); break;
+                case "lo": return QuitType.LOGOUT;
+                case "q": return QuitType.QUIT;
+                default: System.out.println("You did not correctly enter one of the options. Please try again."); break;
             }
         }
     }
